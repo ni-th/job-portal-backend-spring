@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class CompanyController {
     @Autowired
     CompanyService companyService;
@@ -25,6 +26,7 @@ public class CompanyController {
     @DeleteMapping("delete-company/{id}")
     public void delete( @PathVariable Integer id){
         companyService.delete(id);
+        System.out.println("Company Deleted Succesfully");
     }
     @PutMapping("/update-company")
     public void update(@RequestBody CompanyDTO companyDTO){

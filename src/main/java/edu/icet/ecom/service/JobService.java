@@ -42,6 +42,12 @@ public class JobService {
         jobRepository.deleteById(id);
     }
     public void update(JobDTO jobDTO){
-        jobRepository.save(new ModelMapper().map(jobDTO, JobEntity.class));
+        JobEntity jobEntity = modelMapper.map(jobDTO, JobEntity.class);
+        CompanyEntity company = companyRepository.findById(jobDTO.getCompany_id())
+                .orElseThrow(() -> new RuntimeException("Company not found"));
+
+        jobEntity.setCompanyEntity(company);
+
+        jobRepository.save(jobEntity);
     }
 }
